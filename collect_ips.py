@@ -45,6 +45,7 @@ if __name__ == '__main__':
     result = fetch_top_ips(url)
     if result:
         with open('ip.txt', 'w') as f:
+            f.write('mci.ircf.space\n')
             ips = list(result.values())
             for i, ip in enumerate(ips):
                 if i < len(ips) - 1:
