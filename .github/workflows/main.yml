@@ -2,8 +2,7 @@ name: Update IP List
 
 on:
   schedule:
-    - cron: '30 * * * *'
-  workflow_dispatch:
+    - cron: '*/30 * * * *'  # 每 30 分钟运行一次（UTC 时间）
 
 jobs:
 
