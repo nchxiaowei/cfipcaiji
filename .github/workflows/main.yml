@@ -1,6 +1,7 @@
 name: Update IP List
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/30 * * * *'  # 每 30 分钟运行一次（UTC 时间）
 
@@ -28,12 +29,15 @@ jobs:
         
     - name: Commit and push changes
       run: |
-        git config --global user.email "tianshideyou@proton.me"
-        git config --global user.name "tianshipapa"
+        git config --global user.name "github-actions[bot]"
+        git config --global  user.email "github-actions[bot]@users.noreply.github.com"
         if [ -n "$(git status --porcelain)" ]; then
+          TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
           git add ip.txt
-          git commit -m "Automatic update"
+          git commit  -m "Automatic update at ${TIMESTAMP}"
           git push
         else
           echo "No changes detected, skipping commit."
         fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
